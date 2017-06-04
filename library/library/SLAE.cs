@@ -8,6 +8,8 @@ namespace library
 {
     class SLAE
     {
+        public delegate Vector Solver(SLAE system);
+
         private static string infinitCountOfSolutionsString = "Infinit number system's solutions";
         private static string noSolutionsString = "No system's solutions";
         private static string incorrectMatrixAndVectorSizes = "Incorrect matrix and vector sizes!";
@@ -63,12 +65,19 @@ namespace library
             }
         }
 
-        public double Soltion(int index)
+        public Matrix SystemMatrix
         {
-            if (solution == null)
-                solution = RetrieveSolution();
-
-            return solution[order[index]];
+            get
+            {
+                return AInitial;
+            }
+        }
+        public Vector RightPart
+        {
+            get
+            {
+                return fInitial;
+            }
         }
 
         public int UnknownVariablesCount
@@ -86,26 +95,23 @@ namespace library
             }
         }
 
+        public void Solve(Solver method)
+        {
+            solution = method(this);
+        }
+
+        public double Soltion(int index)
+        {
+            if (solution == null)
+                solution = RetrieveSolution(false);
+
+            return solution[order[index]];
+        }
         private void InitOrder()
         {
             order = new int[AInitial.ColumnsCount];
             for (int i = 0; i < order.Length; i++)
                 order[i] = i;
-        }
-
-        public Matrix SystemMatrix
-        {
-            get
-            {
-                return AInitial;
-            }
-        }
-        public Vector RightPart
-        {
-            get
-            {
-                return fInitial;
-            }
         }
 
         public int FindNoZeroColumn(int row, int startColumn)
@@ -152,7 +158,7 @@ namespace library
             order[col2] = tmp;
         }
 
-        private Vector RetrieveSolution()
+        private Vector RetrieveSolution(bool upDown)
         {
             double[] solution = new double[ACurrent.ColumnsCount];
             bool[] isInitialize = new bool[ACurrent.ColumnsCount];
@@ -163,13 +169,15 @@ namespace library
                 isInitialize[i] = false;
             }
 
-            for (int i = ACurrent.RowsCount - 1; i >= 0; i--)
+            for (int i = upDown ? 0 : ACurrent.RowsCount - 1; (upDown && i < ACurrent.RowsCount) || 
+                                                              (!upDown && i >= 0); 
+                                                              i += upDown ? 1 : -1)
             {
                 int index = FindNoZeroColumn(i, i);
 
                 double newSolution = 0;
 
-                for (int j = index + 1; j < ACurrent.ColumnsCount; j++)
+                for (int j = upDown ? 0 : index + 1; (upDown && j < index) && (!upDown && j < ACurrent.ColumnsCount); j++)
                 {
                     newSolution -= ACurrent[i, j] * solution[j];
                 }
@@ -186,10 +194,10 @@ namespace library
 
             return solution;
         }
-        public Vector InitialOrderSolution()
+        public Vector InitialOrderSolution(bool upDown)
         {
             if (this.solution == null)
-                this.solution = RetrieveSolution();
+                this.solution = RetrieveSolution(upDown);
 
             Vector solution = (double[])this.solution;
 
@@ -201,6 +209,11 @@ namespace library
             }
 
             return solution;
+        }
+
+        public Vector Deviation()
+        {
+            return AInitial * solution - fInitial;
         }
 
         public static string ResponseAboutExceptionalSolution(bool hasZeroRow)

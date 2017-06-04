@@ -415,6 +415,52 @@ namespace library
 
             return func;
         }
+        public static explicit operator Polynomial(MathFunction func)
+        {
+            if (func.type != MathFunctionType.Sum)
+                throw new InvalidCastException();
+
+            double[] coef = new double[func.functions.Count];
+            int pointer = 0;
+            bool incremented = false;
+
+            for (int i = 0; i < func.functions.Count; i++)
+            {
+                if (i == 0)
+                {
+                    ConstFunction num;
+                    incremented = false;
+                    for (int j = 0; j < func.functions.Count; j++)
+                        if ((num = func.functions[j] as ConstFunction) != null)
+                        {
+                            coef[0] += num.coef;
+                            incremented = true;
+                        }
+                }
+                else
+                {
+                    PowerFunction num;
+                    ConstFunction step;
+                    incremented = false;
+                    for (int j = 0; j < func.functions.Count; j++)
+                        if ((num = func.functions[j] as PowerFunction) != null && 
+                            (step = num.functions[1] as ConstFunction) != null &&
+                            step.coef == pointer)
+                        {
+                            coef[pointer] += num.coef;
+                            incremented = true;
+                        }
+                }
+
+                if (incremented)
+                    pointer += 1;
+            }
+
+            for (int i = 0; i < coef.Length; i++)
+                coef[i] *= func.coef;
+
+            return new Polynomial(coef);
+        }
 
         public override string ToString()
         {

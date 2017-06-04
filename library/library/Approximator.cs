@@ -172,6 +172,15 @@ namespace library
             return xn;
         }
 
+        public static int SolutionCount(MathFunction func, double a, double b)
+        {
+            return 0;
+        }
+        public static Vector ShturmMethod(MathFunction func)
+        {
+            return null;
+        }
+
         #endregion
 
         #region Gauss's method
@@ -200,16 +209,16 @@ namespace library
 
         #region Holeckii's method
 
-        public static Matrix HoleckiiMethod(Matrix matrix, Matrix f)
+        public static Vector HoleckiiMethod(SLAE system)
         {
-            if (!matrix.IsNonDegenerate())
+            if (!system.SystemMatrix.IsNonDegenerate())
                 throw new Exception(methodIsNotApplyableString);
 
             Matrix low, up;
 
-            DetermineLowAndUpMatrix(matrix, out low, out up);
+            DetermineLowAndUpMatrix(system.SystemMatrix, out low, out up);
 
-            return GetXSolution(up, GetYSolution(low, f));
+            return new SLAE(up, new SLAE(low, system.RightPart).InitialOrderSolution(true)).InitialOrderSolution(false);
         }
 
         private static void DetermineLowAndUpMatrix(Matrix matrix, out Matrix low, out Matrix up)
@@ -241,13 +250,13 @@ namespace library
                 index++;
             }
         }
-        private static Matrix GetYSolution(Matrix low, Matrix f)
+        private static Vector GetYSolution(Matrix low, Vector f)
         {
             double[] solution = new double[low.ColumnsCount];
 
             for (int i = 0; i < low.RowsCount; i++)
             {
-                solution[i] = f[i, 0];
+                solution[i] = f[i];
                 for (int j = 0; j < i; j++)
                 {
                     solution[i] -= low[i, j] * solution[j];
@@ -257,13 +266,13 @@ namespace library
 
             return solution;
         }
-        private static Matrix GetXSolution(Matrix up, Matrix y)
+        private static Vector GetXSolution(Matrix up, Vector y)
         {
             double[] solution = new double[up.ColumnsCount];
 
             for (int i = up.RowsCount - 1; i >= 0; i--)
             {
-                solution[i] = y[i, 0];
+                solution[i] = y[i];
                 for (int j = i + 1; j < up.ColumnsCount; j++)
                 {
                     solution[i] -= up[i, j] * solution[j];
@@ -276,19 +285,20 @@ namespace library
 
         #endregion
 
-        #region Simple Iteration method
+        #region Iteration methods
 
-        public static Matrix SimpleIteration(Matrix matrix, Matrix f)
+        public static Vector SimpleIteration(SLAE system)
         {
-            if (!matrix.IsNonDegenerate())
+            if (!system.SystemMatrix.IsNonDegenerate())
                 throw new Exception(methodIsNotApplyableString);
 
-            double alpha = RandomNumber(0, 2.0 / (matrix.Transposed() * matrix).FirstNorm);
+            double alpha = RandomNumber(0, 2.0 / (system.SystemMatrix.Transposed() * system.SystemMatrix).FirstNorm);
 
-            Matrix bMatrix = Matrix.UnaryMatrix(matrix.ColumnsCount) - alpha * matrix.Transposed() * matrix,
-                   gVector = alpha * matrix.Transposed() * f;
+            Matrix bMatrix = Matrix.UnaryMatrix(system.SystemMatrix.ColumnsCount) - alpha * system.SystemMatrix.Transposed() * system.SystemMatrix;
+                   
+            Vector gVector = alpha * system.SystemMatrix.Transposed() * system.RightPart;
 
-            Matrix xCurrent = new double[matrix.ColumnsCount],
+            Vector xCurrent = new double[system.SystemMatrix.ColumnsCount],
                    xPrev;
 
             int count = 0;
@@ -308,6 +318,63 @@ namespace library
                 throw new Exception(string.Format(iterationOverflowString, count));
 
             return xCurrent;
+        }
+        public static Vector ZeidelIteration(SLAE system)
+        {
+            if (!system.SystemMatrix.IsNonDegenerate())
+                throw new Exception(methodIsNotApplyableString);
+
+            double alpha = RandomNumber(0, 2.0 / (system.SystemMatrix.Transposed() * system.SystemMatrix).FirstNorm);
+
+            Matrix bMatrix = Matrix.UnaryMatrix(system.SystemMatrix.ColumnsCount) - alpha * system.SystemMatrix.Transposed() * system.SystemMatrix;
+            Matrix HMatrix, FMatrix;
+
+            DivideMatrix(bMatrix, out HMatrix, out FMatrix);
+
+            Vector gVector = alpha * system.SystemMatrix.Transposed() * system.RightPart;
+
+            Vector xCurrent = new double[system.SystemMatrix.ColumnsCount],
+                   xPrev;
+
+            int count = 0;
+
+            do
+            {
+                xPrev = xCurrent;
+
+                Vector prevPart = FMatrix * xPrev + gVector;
+
+                for (int i = 0; i < xCurrent.Count; i++)
+                {
+                    xCurrent[i] = prevPart[i];
+
+                    for (int j = 0; j < i; j++)
+                        xCurrent[i] += xCurrent[i] * HMatrix[i, j];
+                }
+
+                count++;
+            } while (!(bMatrix.FirstNorm > 0.5 && bMatrix.FirstNorm < 1 &&
+                       bMatrix.FirstNorm / (1 - bMatrix.FirstNorm) * (xCurrent - xPrev).FirstNorm <= epsilan ||
+                    (xCurrent - xPrev).FirstNorm <= epsilan ||
+                    count == maxIterationCount));
+
+            if (count == maxIterationCount)
+                throw new Exception(string.Format(iterationOverflowString, count));
+
+            return xCurrent;
+        }
+
+        private static void DivideMatrix(Matrix A, out Matrix H, out Matrix F)
+        {
+            H = new double[A.RowsCount, A.ColumnsCount];
+            F = new double[A.RowsCount, A.ColumnsCount];
+
+            for (int i = 0; i < A.RowsCount; i++)
+                for (int j = 0; j < A.ColumnsCount; j++)
+                    if (i < j)
+                        H[i, j] = A[i, j];
+                    else
+                        F[i, j] = A[i, j];
         }
 
         #endregion
