@@ -202,6 +202,11 @@ namespace library
 
     class MathFunction
     {
+        private static double epsilan = Math.Pow(10, -4);
+
+        private delegate bool Condition(double f, double best);
+        private delegate bool SingleCondition(double f);
+
         protected double coef;
         protected MathFunctionType type;
         protected List<MathFunction> functions;
@@ -422,6 +427,72 @@ namespace library
             result += ")";
 
             return result;
+        }
+
+        public double MaxValue(double a, double b, bool isAbsolute = true)
+        {
+            return FindValue(a, b, (double f, double best) => { return f > best; }, double.MinValue, isAbsolute);
+        }
+        public double MinValue(double a, double b, bool isAbsolute = true)
+        {
+            return FindValue(a, b, (double f, double best) => { return f < best; }, double.MaxValue, isAbsolute);
+        }
+
+        private double FindValue(double a, double b, Condition cond, double startVal, bool isAbsolute)
+        {
+            double result = startVal;
+
+            for (double x = a; x <= b; x += epsilan)
+            {
+                double f = Calculate(x);
+                f = isAbsolute ? Math.Abs(f) : f;
+
+                if (cond(f, result)) result = f;
+            }
+
+            return result;
+        }
+
+        private bool IsGood(SingleCondition cond, double a, double b)
+        {
+            try
+            {
+                for (double i = a; i <= b; i += epsilan)
+                {
+                    if (!cond(Calculate(i)))
+                    {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+            catch (NotFiniteNumberException)
+            {
+                return false;
+            }
+            catch (DivideByZeroException)
+            {
+                return false;
+            }
+        }
+
+        public bool IsGreaterThanZero(double a, double b)
+        {
+            return IsGood((double func) => { return func > 0; }, a, b);
+        }
+        public bool IsSmallerThanZero(double a, double b)
+        {
+            return IsGood((double f) => { return f < 0}, a, b);
+        }
+        public bool IsContinuous(double a, double b)
+        {
+            return IsGood((double func) => { return !double.IsInfinity(func) && !double.IsNaN(func); },
+                          a, b);
+        }
+        public bool IsWithConstSign(double a, double b)
+        {
+            return IsSmallerThanZero(a, b) || IsGreaterThanZero(a, b);
         }
     }
 }
