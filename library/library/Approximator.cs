@@ -203,7 +203,7 @@ namespace library
                 system.MakeDownEqualToZero(i, i);
             }
 
-            return system.InitialOrderSolution();
+            return system.InitialOrderSolution(false);
         }
         #endregion
 
@@ -456,10 +456,10 @@ namespace library
                         aMatrix[i, j] += Math.Pow(x[p], i + j);
             }
 
-            Matrix A = aMatrix, 
-                   F = right;
+            Matrix A = aMatrix; 
+            Vector F = right;
 
-            return new Polynomial((double[])GaussMethod(A, F));
+            return new Polynomial((double[])GaussMethod(new SLAE(A, F)));
         }
         public static double StandardDeviation(double[] x, double[] f, Polynomial Q)
         {

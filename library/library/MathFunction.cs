@@ -529,7 +529,7 @@ namespace library
         }
         public bool IsSmallerThanZero(double a, double b)
         {
-            return IsGood((double f) => { return f < 0}, a, b);
+            return IsGood((double f) => { return f < 0; }, a, b);
         }
         public bool IsContinuous(double a, double b)
         {

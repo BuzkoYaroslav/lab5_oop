@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="library.Vector">
+    <Position X="16.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAQAABkAaIEAAAQAAEgAAAAAgAAgCAAgAQA=</HashCode>
+      <FileName>Vector.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="library.CosFunction">
+    <Position X="5.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAEAAAAAAAAACAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>MathFunction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="library.SinFunction">
+    <Position X="7.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAEAAAAAAAAACAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>MathFunction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="library.PowerFunction">
+    <Position X="1" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAEAAAAAAAAACAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>MathFunction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="library.LnFunction">
+    <Position X="10" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAEAAAAAAAAACAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>MathFunction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="library.ConstFunction">
+    <Position X="12.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAEAAAAAAAAACAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>MathFunction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="library.XFunction">
+    <Position X="3.25" Y="8" Width="1.5" />
+    <InheritanceLine Type="library.MathFunction" ManuallyRouted="true" FixedFromPoint="true">
+      <Path>
+        <Point X="6" Y="6.987" />
+        <Point X="6" Y="7.188" />
+        <Point X="4" Y="7.188" />
+        <Point X="4" Y="8" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAEAAAAAAAAACAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>MathFunction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="library.MathFunction">
+    <Position X="4.25" Y="0.75" Width="3.5" />
+    <NestedTypes>
+      <Delegate Name="library.MathFunction.Condition" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>MathFunction.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="library.MathFunction.SingleCondition" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>MathFunction.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>IAAAAgAAEQAAQAgEYgUAABAARCIBAAAAAQBgAAAAUCA=</HashCode>
+      <FileName>MathFunction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="library.Matrix">
+    <Position X="10" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQACAEAAAAQAgBAAaIEAAgBAQAhBAKQAQAAgAAARCAI=</HashCode>
+      <FileName>Matrix.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="library.Polynomial">
+    <Position X="14.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAABAMAAAAAAEaAEAQAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Polynomial.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="library.SLAE">
+    <Position X="12.25" Y="0.75" Width="1.5" />
+    <NestedTypes>
+      <Delegate Name="library.SLAE.Solver" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>SLAE.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AARAACABAAAYAAQDCgAAACAICQAQgMCgAAADICAAAAA=</HashCode>
+      <FileName>SLAE.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="library.Approximator">
+    <Position X="18.25" Y="0.75" Width="1.5" />
+    <NestedTypes>
+      <Delegate Name="library.Approximator.Condition" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Approximator.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAFBAAYAABFABEBBAAIABBABAghkIAQEHIgQCgAQBQ=</HashCode>
+      <FileName>Approximator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="library.MathFunctionType" Collapsed="true">
+    <Position X="14.25" Y="6" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>MathFunction.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
