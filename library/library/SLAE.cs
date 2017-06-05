@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace library
 {
-    class SLAE
+    public class SLAE
     {
         public delegate Vector Solver(SLAE system);
 
@@ -177,7 +177,7 @@ namespace library
 
                 double newSolution = 0;
 
-                for (int j = upDown ? 0 : index + 1; (upDown && j < index) && (!upDown && j < ACurrent.ColumnsCount); j++)
+                for (int j = upDown ? 0 : index + 1; (upDown && j < index) || (!upDown && j < ACurrent.ColumnsCount); j++)
                 {
                     newSolution -= ACurrent[i, j] * solution[j];
                 }
@@ -219,6 +219,40 @@ namespace library
         public static string ResponseAboutExceptionalSolution(bool hasZeroRow)
         {
             return hasZeroRow ? infinitCountOfSolutionsString : noSolutionsString;
+        }
+
+        public override string ToString()
+        {
+            string result = "";
+
+            for (int i = 0; i < EquasionsCount; i++)
+            {
+                for (int j = 0; j < UnknownVariablesCount; j++)
+                {
+                    if (AInitial[i, j] == 1)
+                        result += "X" + j.ToString();
+                    else
+                        result += AInitial[i, j] + " * X" + j.ToString();
+
+                    if (j == UnknownVariablesCount - 1)
+                        result += " = ";
+                    else
+                        result += " + ";
+                }
+
+                result += fInitial[i] + "\n"; 
+            }
+
+            return result;
+        }
+        public string SolutionString()
+        {
+            string result = "";
+
+            for (int i = 0; i < solution.Count; i++)
+                result += "X" + i.ToString() + " = " + Math.Round(solution[i], 2) + "\n";
+
+            return result;
         }
 
     }

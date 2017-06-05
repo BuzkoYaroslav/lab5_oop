@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace library
 {
-    class Vector
+    public class Vector
     {
         private const string incorrectVectorString = "Matrix has incorrect lengths!";
         private const string vectorAndMatrixCannotBeMultipliedString = "Matricies cannot be multiplied!";
@@ -15,15 +15,12 @@ namespace library
 
         double[] elements;
 
-        public Vector(double[] matrix)
+        public Vector(double[] vector)
         {
-            elements = matrix;
-        }
-        public Vector(double vector)
-        {
-            elements = new double[1];
+            elements = new double[vector.Length];
 
-            elements[0] = vector;
+            for (int i = 0; i < elements.Length; i++)
+                elements[i] = vector[i];
         }
 
         public double this[int i]
@@ -129,7 +126,7 @@ namespace library
             {
                 result[i] = 0;
                 for (int p = 0; p < rowCount; p++)
-                    result[i] += matrix[p, i] * vect[i];
+                    result[i] += matrix[p, i] * vect[p];
             }
 
             return result;
@@ -149,7 +146,7 @@ namespace library
             {
                 result[i] = 0;
                 for (int p = 0; p < colCount; p++)
-                    result[i] += matrix[i, p] * vect[i];
+                    result[i] += matrix[i, p] * vect[p];
             }
 
             return result;

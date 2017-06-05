@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace library
 {
-    enum MathFunctionType { Sum, Multiplication, Division }
+    public enum MathFunctionType { Sum, Multiplication, Division }
 
     class CosFunction: MathFunction
     {
@@ -40,6 +40,15 @@ namespace library
         public override bool IsZero()
         {
             return coef == 0;
+        }
+
+        protected override MathFunction MinusFunction()
+        {
+            return new CosFunction(-coef, functions[0]);
+        }
+        protected override MathFunction Multiply(double coef)
+        {
+            return new CosFunction(coef * this.coef, functions[0]);
         }
     }
     class SinFunction: MathFunction
@@ -75,6 +84,15 @@ namespace library
         {
             return coef == 0;
         }
+
+        protected override MathFunction MinusFunction()
+        {
+            return new SinFunction(-coef, functions[0]);
+        }
+        protected override MathFunction Multiply(double coef)
+        {
+            return new SinFunction(coef * this.coef, functions[0]);
+        }
     }
     class PowerFunction: MathFunction
     {
@@ -105,6 +123,15 @@ namespace library
         public override bool IsZero()
         {
             return functions[0].IsZero() && coef == 0;
+        }
+
+        protected override MathFunction MinusFunction()
+        {
+            return new PowerFunction(-coef, functions[0], functions[1]);
+        }
+        protected override MathFunction Multiply(double coef)
+        {
+            return new PowerFunction(coef * this.coef, functions[0], functions[1]);
         }
     }
     class LnFunction: MathFunction
@@ -140,6 +167,14 @@ namespace library
         {
             return coef == 0;
         }
+        protected override MathFunction MinusFunction()
+        {
+            return new LnFunction(-coef, functions[0]);
+        }
+        protected override MathFunction Multiply(double coef)
+        {
+            return new LnFunction(coef * this.coef, functions[0]);
+        }
     }
     class ConstFunction: MathFunction
     {
@@ -162,13 +197,22 @@ namespace library
 
         public override string ToString()
         {
-            return coef != 0 ? Math.Round(coef, 2).ToString() : "" ;
+            return Math.Round(coef, 2).ToString();
         }
 
         public override bool IsZero()
         {
             return coef == 0;
         }
+        protected override MathFunction MinusFunction()
+        {
+            return new ConstFunction(-coef);
+        }
+        protected override MathFunction Multiply(double coef)
+        {
+            return new ConstFunction(coef * this.coef);
+        }
+
     }
     class XFunction: MathFunction
     {
@@ -198,9 +242,18 @@ namespace library
         {
             return coef == 0;
         }
+
+        protected override MathFunction MinusFunction()
+        {
+            return new XFunction(-coef);
+        }
+        protected override MathFunction Multiply(double coef)
+        {
+            return new XFunction(coef * this.coef);
+        }
     }
 
-    class MathFunction
+    public class MathFunction
     {
         private static double epsilan = Math.Pow(10, -4);
 
@@ -272,7 +325,7 @@ namespace library
 
         private void InitializeDivision(MathFunction[] functions)
         {
-            MathFunction up = new MathFunction(coef, MathFunctionType.Multiplication);
+            MathFunction up = new MathFunction(1.0d, MathFunctionType.Multiplication);
             MathFunction low = new MathFunction(1.0d, MathFunctionType.Multiplication);
 
             for (int i = 0; i < functions.Length; i++)
@@ -292,7 +345,7 @@ namespace library
             if (functions.Count == 0)
                 throw new Exception("Function is empty!");
 
-            double result = coef * functions[0].Calculate(x);
+            double result = functions[0].Calculate(x);
 
             for (int i = 1; i < functions.Count; i++)
                 switch(type)
@@ -307,6 +360,8 @@ namespace library
                         result /= functions[i].Calculate(x);
                         break;
                 }
+
+            result *= coef;
 
             return result;
         }
@@ -361,9 +416,18 @@ namespace library
             return result;
         }
 
+        protected virtual MathFunction MinusFunction()
+        {
+            return new MathFunction(-coef, type, functions.ToArray());
+        }
+        protected virtual MathFunction Multiply(double coef)
+        {
+            return new MathFunction(coef * this.coef, type, functions.ToArray());
+        }
+
         public static MathFunction operator -(MathFunction func)
         {
-            return new MathFunction(-func.coef, func.type, func.functions.ToArray());
+            return func.MinusFunction();
         }
         public static MathFunction operator +(MathFunction func1, MathFunction func2)
         {
@@ -387,7 +451,7 @@ namespace library
         }
         public static MathFunction operator *(double coef, MathFunction func)
         {
-            return new MathFunction(coef * func.coef, func.type, func.functions.ToArray());
+            return func.Multiply(coef);
         }
         public static MathFunction operator /(MathFunction func, double coef)
         {
@@ -464,7 +528,7 @@ namespace library
 
         public override string ToString()
         {
-            string result = "(";
+            string result = coef != 1 ? Math.Round(coef, 2) + " * " : "" + "(";
             string splitter = type == MathFunctionType.Sum ? " + " : type == MathFunctionType.Multiplication ? " * " : " : ";
 
             for (int i = 0; i < functions.Count; i++)

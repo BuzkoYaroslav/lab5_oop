@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace library
 {
-    class Matrix
+    public class Matrix
     {
         private const string matrixWithoutDeterminantString = "Matrix does not have determinant!";
         private const string incorrectMatrixString = "Matrix has incorrect lengths!";
@@ -18,7 +18,11 @@ namespace library
 
         public Matrix(double[,] matrix)
         {
-            this.elements = matrix;
+            elements = new double[matrix.GetLength(0), matrix.GetLength(1)];
+
+            for (int i = 0; i < elements.GetLength(0); i++)
+                for (int j = 0; j < elements.GetLength(1); j++)
+                    elements[i, j] = matrix[i, j];
         }
         public Matrix(double[] vector)
         {
@@ -66,7 +70,7 @@ namespace library
             {
                 double norm = -1;
 
-                for (int i = 0; i < ColumnsCount; i++)
+                for (int i = 0; i < RowsCount; i++)
                 {
                     double sum = 0;
                     for (int j = 0; j < ColumnsCount; j++)

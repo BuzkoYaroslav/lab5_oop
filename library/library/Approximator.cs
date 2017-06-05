@@ -16,7 +16,7 @@ namespace library
 
         public static double epsilan = Math.Pow(10, -4);
         public static double epsilanIter = Math.Pow(10, -3);
-        public static int maxIterationCount = 10000;
+        public static int maxIterationCount = 10000000;
 
         public static Random rnd = new Random();
 
@@ -107,8 +107,10 @@ namespace library
             return func.IsContinuous(a, b) && func.IsWithConstSign(a, b);
         }
 
-        public static double SimpleIteration(MathFunction func, double a, double b)
+        public static double SimpleIteration(Equasion eq, double a, double b)
         {
+            MathFunction func = eq.Left - eq.Right;
+
             MathFunction der1 = func.Derivative(1);
 
             if (!IsSuitable(der1, a, b))
@@ -120,8 +122,10 @@ namespace library
 
             return GenericIteration(func, ksi, a, b, x0);
         }
-        public static double NewtonMethod(MathFunction func, double a, double b)
+        public static double NewtonMethod(Equasion eq, double a, double b)
         {
+            MathFunction func = eq.Left - eq.Right;
+
             MathFunction der1 = func.Derivative(1),
                          der2 = func.Derivative(2);
 
@@ -135,8 +139,10 @@ namespace library
 
             return GenericIteration(func, ksi, a, b, x0);
         }
-        public static double ChordsMethod(MathFunction func, double a, double b)
+        public static double ChordsMethod(Equasion eq, double a, double b)
         {
+            MathFunction func = eq.Left - eq.Right;
+
             MathFunction der1 = func.Derivative(1),
                          der2 = func.Derivative(2);
 
@@ -152,8 +158,10 @@ namespace library
 
             return GenericIteration(func, ksi, a, b, x0);
         }
-        public static double HalfDivision(MathFunction func, double a, double b)
+        public static double HalfDivision(Equasion eq, double a, double b)
         {
+            MathFunction func = eq.Left - eq.Right;
+
             if (func.Calculate(a) * func.Calculate(b) > 0)
                 return double.PositiveInfinity;
 
@@ -172,11 +180,11 @@ namespace library
             return xn;
         }
 
-        public static int SolutionCount(MathFunction func, double a, double b)
+        public static int SolutionCount(Equasion eq, double a, double b)
         {
             return 0;
         }
-        public static Vector ShturmMethod(MathFunction func)
+        public static Vector ShturmMethod(Equasion eq)
         {
             return null;
         }
@@ -296,7 +304,7 @@ namespace library
 
             Matrix bMatrix = Matrix.UnaryMatrix(system.SystemMatrix.ColumnsCount) - alpha * system.SystemMatrix.Transposed() * system.SystemMatrix;
                    
-            Vector gVector = alpha * system.SystemMatrix.Transposed() * system.RightPart;
+            Vector gVector = alpha * (system.SystemMatrix.Transposed() * system.RightPart);
 
             Vector xCurrent = new double[system.SystemMatrix.ColumnsCount],
                    xPrev;
@@ -310,8 +318,8 @@ namespace library
 
                 count++;
             } while (!(bMatrix.FirstNorm > 0.5 && bMatrix.FirstNorm < 1 &&
-                       bMatrix.FirstNorm / (1 - bMatrix.FirstNorm) * (xCurrent - xPrev).FirstNorm <= epsilan || 
-                    (xCurrent - xPrev).FirstNorm <= epsilan || 
+                       bMatrix.FirstNorm / (1 - bMatrix.FirstNorm) * (xCurrent - xPrev).FirstNorm <= epsilan ||
+                    (xCurrent - xPrev).FirstNorm <= epsilan ||
                     count == maxIterationCount));
 
             if (count == maxIterationCount)
@@ -341,6 +349,7 @@ namespace library
             do
             {
                 xPrev = xCurrent;
+                xCurrent = new double[system.SystemMatrix.ColumnsCount];
 
                 Vector prevPart = FMatrix * xPrev + gVector;
 
@@ -349,7 +358,7 @@ namespace library
                     xCurrent[i] = prevPart[i];
 
                     for (int j = 0; j < i; j++)
-                        xCurrent[i] += xCurrent[i] * HMatrix[i, j];
+                        xCurrent[i] += xCurrent[j] * HMatrix[i, j];
                 }
 
                 count++;
@@ -371,7 +380,7 @@ namespace library
 
             for (int i = 0; i < A.RowsCount; i++)
                 for (int j = 0; j < A.ColumnsCount; j++)
-                    if (i < j)
+                    if (i > j)
                         H[i, j] = A[i, j];
                     else
                         F[i, j] = A[i, j];
