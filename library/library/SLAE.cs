@@ -10,9 +10,9 @@ namespace library
     {
         public delegate Vector Solver(SLAE system);
 
-        private static string infinitCountOfSolutionsString = "Infinit number system's solutions";
-        private static string noSolutionsString = "No system's solutions";
-        private static string incorrectMatrixAndVectorSizes = "Incorrect matrix and vector sizes!";
+        private const string infinitCountOfSolutionsString = "Infinit number system's solutions";
+        private const string noSolutionsString = "No system's solutions";
+        private const string incorrectMatrixAndVectorSizesString = "Incorrect matrix and vector sizes!";
 
         private Matrix AInitial, ACurrent;
         private Vector fInitial, fCurrent;
@@ -24,7 +24,7 @@ namespace library
         public SLAE(Matrix A, Vector f)
         {
             if (f.Count != A.RowsCount)
-                throw new Exception(incorrectMatrixAndVectorSizes);
+                throw new Exception(incorrectMatrixAndVectorSizesString);
 
             AInitial = (double[,])A;
             ACurrent = (double[,])A;

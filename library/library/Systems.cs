@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using library.Systems_methods;
 
 namespace library
 {
@@ -112,18 +113,18 @@ namespace library
             switch(index)
             {
                 case 0:
-                    system.Solve(Approximator.GaussMethod);
+                    system.Solve(new GaussMethod().Solve);
                     break;
                 case 1:
-                    system.Solve(Approximator.HoleckiiMethod);
+                    system.Solve(new HoleckiiMethod().Solve);
                     break;
                 case 2:
                     break;
                 case 3:
-                    system.Solve(Approximator.SimpleIteration);
+                    system.Solve(new SimpleIterationSystem().Solve);
                     break;
                 case 4:
-                    system.Solve(Approximator.ZeidelIteration);
+                    system.Solve(new ZeidelMethod().Solve);
                     break;
                 default:
                     break;

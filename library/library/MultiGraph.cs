@@ -105,7 +105,7 @@ namespace library
         {
             int yPixel = pictureBox1.Height / 2;
 
-            yPixel += (int)(y * pictureBox1.Height / (maxY * 2));
+            yPixel -= (int)(y * pictureBox1.Height / (maxY * 2));
 
             return yPixel;
         }

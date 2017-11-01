@@ -47,6 +47,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Approximator.cs" />
+    <Compile Include="Equasion methods\ChordMethod.cs" />
+    <Compile Include="Equasion methods\EquasionMethod.cs" />
+    <Compile Include="Equasion methods\GenericIteration.cs" />
+    <Compile Include="Equasion methods\HalfDivision.cs" />
+    <Compile Include="Equasion methods\NewtonMethod.cs" />
+    <Compile Include="Equasion methods\SimpleIteration.cs" />
     <Compile Include="Equasion.cs" />
     <Compile Include="Equasions.cs">
       <SubType>Form</SubType>
@@ -60,6 +66,10 @@
     <Compile Include="Form1.designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Function methods\FunctionMethod.cs" />
+    <Compile Include="Function methods\LagranzFunction.cs" />
+    <Compile Include="Function methods\MinSquareFunction.cs" />
+    <Compile Include="Function methods\NewtonFunction.cs" />
     <Compile Include="Graph.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,6 +84,7 @@
     </Compile>
     <Compile Include="MathFunction.cs" />
     <Compile Include="Matrix.cs" />
+    <Compile Include="Method.cs" />
     <Compile Include="Polynomial.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -96,6 +107,11 @@
     <Compile Include="Solution.Designer.cs">
       <DependentUpon>Solution.cs</DependentUpon>
     </Compile>
+    <Compile Include="Systems methods\GaussMethod.cs" />
+    <Compile Include="Systems methods\HoleckiiMethod.cs" />
+    <Compile Include="Systems methods\SimpleIterationSystem.cs" />
+    <Compile Include="Systems methods\SystemMethod.cs" />
+    <Compile Include="Systems methods\ZeidelMethod.cs" />
     <Compile Include="Systems.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -159,6 +175,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -7,14 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using library.Equasion_methods;
 
 namespace library
 {
     public partial class Equasions : Form
     {
         private static Equasion algebr = new Equasion(new Polynomial(-19, -7, 0, 1), 0);
-        private static Equasion trans = new Equasion(new SinFunction(1.0d, new XFunction(0.4d) + 0.4) / new CosFunction(1.0d, new XFunction(0.4d) + 0.4),
-            new PowerFunction(1.0d, new XFunction(1.0d), 2));
+        private static Equasion trans = new Equasion(new CosFunction(1.0d, new XFunction(1.0d)),
+            new XFunction(0.5d) + 1);
 
         private Equasion eqToSolve = algebr;
 
@@ -49,16 +50,16 @@ namespace library
             switch (index)
             {
                 case 0:
-                    eqToSolve.Solve(Approximator.SimpleIteration, a, b);
+                    eqToSolve.Solve(new SimpleIteration().Solve, a, b);
                     break;
                 case 1:
-                    eqToSolve.Solve(Approximator.NewtonMethod, a, b);
+                    eqToSolve.Solve(new NewtonMethod().Solve, a, b);
                     break;
                 case 2:
-                    eqToSolve.Solve(Approximator.ChordsMethod, a, b);
+                    eqToSolve.Solve(new ChordMethod().Solve, a, b);
                     break;
                 case 3:
-                    eqToSolve.Solve(Approximator.HalfDivision, a, b);
+                    eqToSolve.Solve(new HalfDivision().Solve, a, b);
                     break;
                 default:
                     break;

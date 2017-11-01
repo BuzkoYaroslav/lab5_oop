@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using library.Function_methods;
 
 namespace library
 {
@@ -72,10 +73,13 @@ namespace library
         }
         private void InitializePolynomials()
         {
-            LPoly = Approximator.LagranzPolynomial(x, f);
-            PPoly = Approximator.NewtonPolynomial(x, f);
-            QPoly = Approximator.MinSquares(x, f, mQPolyIndex);
-            standardDeviation = Approximator.StandardDeviation(x, f, QPoly);
+            LPoly = new LagranzFunction().Solve(x, f);
+            PPoly = new NewtonFunction().Solve(x, f);
+
+            MinSquareFunction msq = new MinSquareFunction(mQPolyIndex);
+
+            QPoly = msq.Solve(x, f);
+            standardDeviation = msq.StandardDeviation(x, f, QPoly);
         }
 
 

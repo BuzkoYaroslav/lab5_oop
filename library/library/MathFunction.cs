@@ -343,7 +343,7 @@ namespace library
         public virtual double Calculate(double x)
         {
             if (functions.Count == 0)
-                throw new Exception("Function is empty!");
+                return coef;
 
             double result = functions[0].Calculate(x);
 

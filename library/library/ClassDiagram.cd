@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="library.Vector">
-    <Position X="16.25" Y="0.75" Width="1.5" />
+    <Position X="15.75" Y="0.75" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAQAAAAAAQAABkAaIEAAAQAAEgAAAAAgAAgCAAgAQA=</HashCode>
       <FileName>Vector.cs</FileName>
@@ -10,55 +10,47 @@
   <Class Name="library.CosFunction">
     <Position X="5.5" Y="8" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAEAAAAAAEAAAAAAAAACAAAAAAAAAAAAAAACA=</HashCode>
+      <HashCode>AAAAAAAAEAAAAAAEAAABAAAAACAABAAAAAAAAAAAACA=</HashCode>
       <FileName>MathFunction.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="library.SinFunction">
     <Position X="7.75" Y="8" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAEAAAAAAEAAAAAAAAACAAAAAAAAAAAAAAACA=</HashCode>
+      <HashCode>AAAAAAAAEAAAAAAEAAABAAAAACAABAAAAAAAAAAAACA=</HashCode>
       <FileName>MathFunction.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="library.PowerFunction">
     <Position X="1" Y="8" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAEAAAAAAEAAAAAAAAACAAAAAAAAAAAAAAACA=</HashCode>
+      <HashCode>AAAAAAAAEAAAAAAEAAABAAAAACAABAAAAAAAAAAAACA=</HashCode>
       <FileName>MathFunction.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="library.LnFunction">
     <Position X="10" Y="8" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAEAAAAAAEAAAAAAAAACAAAAAAAAAAAAAAACA=</HashCode>
+      <HashCode>AAAAAAAAEAAAAAAEAAABAAAAACAABAAAAAAAAAAAACA=</HashCode>
       <FileName>MathFunction.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="library.ConstFunction">
-    <Position X="12.25" Y="8" Width="1.5" />
+    <Position X="12.5" Y="8.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAEAAAAAAEAAAAAAAAACAAAAAAAAAAAAAAACA=</HashCode>
+      <HashCode>AAAAAAAAEAAAAAAEAAABAAAAACAABAAAAAAAAAAAACA=</HashCode>
       <FileName>MathFunction.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="library.XFunction">
     <Position X="3.25" Y="8" Width="1.5" />
-    <InheritanceLine Type="library.MathFunction" ManuallyRouted="true" FixedFromPoint="true">
-      <Path>
-        <Point X="6" Y="6.987" />
-        <Point X="6" Y="7.188" />
-        <Point X="4" Y="7.188" />
-        <Point X="4" Y="8" />
-      </Path>
-    </InheritanceLine>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAEAAAAAAEAAAAAAAAACAAAAAAAAAAAAAAACA=</HashCode>
+      <HashCode>AAAAAAAAEAAAAAAEAAABAAAAACAABAAAAAAAAAAAACA=</HashCode>
       <FileName>MathFunction.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="library.MathFunction">
-    <Position X="4.25" Y="0.75" Width="3.5" />
+    <Position X="2.5" Y="0.5" Width="3.5" />
     <NestedTypes>
       <Delegate Name="library.MathFunction.Condition" Collapsed="true">
         <TypeIdentifier>
@@ -72,12 +64,12 @@
       </Delegate>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>IAAAAgAAEQAAQAgEYgUAABAARCIBAAAAAQBgAAAAUCA=</HashCode>
+      <HashCode>IAAAAgAAEQAAQAgEYgUBABAARCIBBAAAAQBgAAAAUCA=</HashCode>
       <FileName>MathFunction.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="library.Matrix">
-    <Position X="10" Y="0.75" Width="1.5" />
+    <Position X="7.5" Y="0.75" Width="3" />
     <TypeIdentifier>
       <HashCode>AQACAEAAAAQAgBAAaIEAAgBAQAhBAKQAQAAgAAARCAI=</HashCode>
       <FileName>Matrix.cs</FileName>
@@ -91,7 +83,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="library.SLAE">
-    <Position X="12.25" Y="0.75" Width="1.5" />
+    <Position X="10.75" Y="0.5" Width="2.5" />
     <NestedTypes>
       <Delegate Name="library.SLAE.Solver" Collapsed="true">
         <TypeIdentifier>
@@ -100,24 +92,140 @@
       </Delegate>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AARAACABAAAYAAQDCgAAACAICQAQgMCgAAADICAAAAA=</HashCode>
+      <HashCode>AARAACABAAAYAAQHCgAAACAICQAQgMCgAIADICAgAAA=</HashCode>
       <FileName>SLAE.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="library.Approximator">
-    <Position X="18.25" Y="0.75" Width="1.5" />
+  <Class Name="library.Equasion">
+    <Position X="0.5" Y="0.5" Width="1.5" />
     <NestedTypes>
-      <Delegate Name="library.Approximator.Condition" Collapsed="true">
+      <Delegate Name="library.Equasion.Solver" Collapsed="true">
         <TypeIdentifier>
-          <NewMemberFileName>Approximator.cs</NewMemberFileName>
+          <NewMemberFileName>Equasion.cs</NewMemberFileName>
         </TypeIdentifier>
       </Delegate>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAAFBAAYAABFABEBBAAIABBABAghkIAQEHIgQCgAQBQ=</HashCode>
-      <FileName>Approximator.cs</FileName>
+      <HashCode>AAAAABAAAAAQAAAEAAAAAAAIAAAAAAAACACAAAAAAAA=</HashCode>
+      <FileName>Equasion.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="library.Equasion_methods.ChordMethod">
+    <Position X="19" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAIAAAQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Equasion methods\ChordMethod.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="library.Equasion_methods.GenericIteration">
+    <Position X="21.5" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAEAAAAAAAAA=</HashCode>
+      <FileName>Equasion methods\GenericIteration.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="library.Equasion_methods.HalfDivision">
+    <Position X="20.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Equasion methods\HalfDivision.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="library.Equasion_methods.NewtonMethod">
+    <Position X="23" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAIAAAQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Equasion methods\NewtonMethod.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="library.Equasion_methods.SimpleIteration">
+    <Position X="25.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAIAAAQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Equasion methods\SimpleIteration.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="library.Function_methods.LagranzFunction" BaseTypeListCollapsed="true">
+    <Position X="19.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Function methods\LagranzFunction.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="library.Function_methods.MinSquareFunction" BaseTypeListCollapsed="true">
+    <Position X="21.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAIBAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Function methods\MinSquareFunction.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="library.Function_methods.NewtonFunction" BaseTypeListCollapsed="true">
+    <Position X="19.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Function methods\NewtonFunction.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="library.Systems_methods.ZeidelMethod" BaseTypeListCollapsed="true">
+    <Position X="24.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAIAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Systems methods\ZeidelMethod.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="library.Systems_methods.GaussMethod" BaseTypeListCollapsed="true">
+    <Position X="23" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Systems methods\GaussMethod.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="library.Systems_methods.HoleckiiMethod" BaseTypeListCollapsed="true">
+    <Position X="24.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Systems methods\HoleckiiMethod.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="library.Systems_methods.SimpleIterationSystem" BaseTypeListCollapsed="true">
+    <Position X="21.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Systems methods\SimpleIterationSystem.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="library.Equasion_methods.EquasionMethod">
+    <Position X="24.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Equasion methods\EquasionMethod.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="library.Function_methods.FunctionMethod">
+    <Position X="19.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Function methods\FunctionMethod.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="library.Systems_methods.SystemMethod">
+    <Position X="23.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Systems methods\SystemMethod.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
   <Enum Name="library.MathFunctionType" Collapsed="true">
     <Position X="14.25" Y="6" Width="1.75" />
     <TypeIdentifier>
